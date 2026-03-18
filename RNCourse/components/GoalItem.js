@@ -1,29 +1,38 @@
-import { StyleSheet, View, Text } from "react-native";
-function GoalItem({ data }) {
+import { StyleSheet, View, Text, Pressable } from "react-native";
+function GoalItem(props) {
   return (
     <View style={styles.goalItem}>
+      <Pressable 
+      style = {({pressed})=> pressed && styles.pressedItem}
+      onPress={props.onDeleteItem.bind(this, props.id)} >
       <Text
         style={styles.goalText}
-        accessibilityLabel={"List Item Number " + data.index + 1} //android
-        testID={"List Item Number " + data.index + 1} //ios
+        accessibilityLabel={"List Item Number " + props.data.index + 1} //android
+        testID={"List Item Number " + props.data.index + 1} //ios
       >
-        {data.index + 1 + ". " + data.item.text}
+        {props.data.index + 1 + ". " + props.text}
       </Text>
+      </Pressable>
     </View>
+    
   );
 }
 export default GoalItem;
 
 const styles = StyleSheet.create({
   goalItem: {
-    borderColor: "#000000",
+    borderColor: '#7f0ee8',
     borderWidth: 1,
-    padding: 8,
     marginVertical: 8,
     borderRadius: 6,
-    backgroundColor: "#b1e2eb",
+    backgroundColor: '#7f0ee8',
+  },
+  pressedItem: {
+    opacity:0.5,
+    backgroundColor: "#ff0000"
   },
   goalText: {
-    color: "#000000",
+    color: "#ffffff",
+    padding: 8,
   },
 });
